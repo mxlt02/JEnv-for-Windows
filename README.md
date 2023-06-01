@@ -1,5 +1,5 @@
 # JEnv for Windows 版本 2 已经发布
-
+汉化了一下， jdk8官网只有安装包 可以看这个弄绿色版https://www.jianshu.com/p/d64d961af945
 ### 完全重写 V.1 版本
 
 ## 用 3 个单词更改当前的 Java 版本
