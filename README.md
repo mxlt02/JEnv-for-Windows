@@ -1,98 +1,92 @@
+# JEnv for Windows 版本 2 已经发布
 
-# JEnv for Windows Version 2 is here.
-### A complete rewrite of V.1
-## Change your current Java version with 3 words
+### 完全重写 V.1 版本
 
- - JEnv allows you to change your current JDK Version.
- - This is helpful for testing or if you have projects requiring
-   different versions of java
- - For example you can build a gradle project
-   which requires java8 without changing your environment variables and
-   then switch back to work with java15
- - It's written in cmd and powershell so it can change the environment variables and can run on any Windows-10+.
+## 用 3 个单词更改当前的 Java 版本
 
-I hope you enjoy it. Please give me a star if you like my work. Thank you!
+- JEnv 允许您更改当前的 JDK 版本。
+- 这对于测试或需要不同版本 Java 的项目非常有用。
+- 例如，您可以构建一个需要 Java8 的 Gradle 项目，而不必更改环境变量，然后切换回使用 Java15 进行工作。
+- 它是用 cmd 和 powershell 编写的，因此可以更改环境变量并可在任何 Windows-10+ 上运行。
 
-# Video Demo:
-![jenv](https://user-images.githubusercontent.com/55546882/162501231-b2e030bf-1194-4a1d-8565-ccd503b63402.svg)
+希望您喜欢它。如果您喜欢我的工作，请给我一个 star。谢谢！
 
-## Installation
-1) **Clone this repository**
-2) **Add it to the path**
-3) **Run `jenv` once so the script can do the rest**
-4) **If your using cmd you need to call the batch file. If you use powershell you should call /src/jenv.ps1**
-5) **Some reported problems putting JEnv into their C:/Programs folder due to required admin rights**
-6) **I hope I could help you. Else open an issue**
+# 视频演示:
 
-## Warning:
-Sometimes its necessary to call jenv when entering a new directory with a local jenv specified. This will set your JAVA_HOME for the current shell and ensures that tools like maven work properly
 
-## Usage (Note: local overwrites change. use overwrites local)
-1) **Add a new Java  environment (requires absolute path)**  
-*jenv add `<name> <path>`*  
-Example: `jenv add jdk15 D:\Programme\Java\jdk-15.0.1`
- 
-2) **Change your java version for the current session**  
-*jenv use `<name>`*  
-Example: `jenv use jdk15`  
-Environment var for scripting:  
----PowerShell: `$ENV:JENVUSE="jdk17"`  
----CMD/BATCH: `set "JENVUSE=jdk17"`
- 
-3) **Clear the java version for the current session**  
-*jenv use remove*  
-Example: `jenv use remove`  
-Environment var for scripting:  
----PowerShell: `$ENV:JENVUSE=$null`  
----CMD/BATCH: `set "JENVUSE="`
 
-4) **Change your java version globally**  
-*jenv change `<name>`*  
-Example: `jenv change jdk15`
+![https://user-images.githubusercontent.com/55546882/162501231-b2e030bf-1194-4a1d-8565-ccd503b63402.svg](https://user-images.githubusercontent.com/55546882/162501231-b2e030bf-1194-4a1d-8565-ccd503b63402.svg)
 
-5) **Always use this java version in this folder**  
-*jenv local `<name>`*  
-Example: `jenv local jdk15  `
 
-6) **Clear the java version for this folder**  
-*jenv local remove*  
-Example: `jenv local remove` 
- 
-7) **List all your Java environments**  
-*jenv list*  
-Example: `jenv list`
 
-8) **Remove an existing JDK from the JEnv list**  
-*jenv remove `<name>`*  
-Example: `jenv remove jdk15`
 
-9) **Enable the use of javac, javaw or other executables sitting in the java directory**  
-*jenv link `<Executable name>`*  
-Example: `jenv link javac`
 
-10) **Uninstall jenv and automatically restore a Java version of your choice**  
-*jenv uninstall `<name>`*  
-Example: `jenv uninstall jdk17`
+## 安装
 
-11) **Automatically search for java versions to be added**  
-*jenv autoscan [--yes|-y] `?<path>?`*  
-Example: `jenv autoscan "C:\Program Files\Java"`  
-Example: `jenv autoscan` // Will search entire system
-Example: `jenv autoscan -y "C:\Program Files\Java"` // Will accept defaults
- ## How does this work?
-This script creates a java.bat file that calls the java.exe with the correct version
-When the ps script changes env vars they get exported to tmp files and applied by the batch file
-An additional parameter to the PowerShell script was added. "--output" alias "-o" will create the tmp files for the batch. See images below  
+1. **克隆此存储库**
+2. **将其添加到路径**
+3. **运行 `jenv` 一次以便脚本可以完成其余部分**
+4. **如果您使用 cmd，则需要调用批处理文件。如果您使用 PowerShell，则应调用 /src/jenv.ps1**
+5. **一些人报告将 JEnv 放入其 C:/Programs 文件夹中时出现问题，因为需要管理员权限**
+6. **希望我能帮到您。否则请打开一个 issue**
 
-![SystemEnvironmentVariablesHirachyShell](https://user-images.githubusercontent.com/55546882/130204196-1a800310-4454-49bd-8d80-161b0e7cca3f.PNG)
+## 警告:
 
-![SystemEnvironmentVariablesHirachyPowerShell PNG](https://user-images.githubusercontent.com/55546882/130204185-b54368cc-34db-40d1-a707-4c5477ca236b.PNG)
+有时需要在指定本地 jenv 的新目录中调用 jenv。这将为当前 shell 设置您的 JAVA_HOME，并确保 Maven 等工具正常工作。
 
-## Contributing
-If you want to contribute feel free to do so. This is a great repository for beginners as the amount of code is not huge and you can understand how it works pretty easily.  
-For running tests I suggest you to use the latest version of powershell (pwsh.exe):  
-https://docs.microsoft.com/en-us/powershell/scripting/install/installing-powershell-on-windows?view=powershell-7.2  
-Be careful you have to run it as pwsh and not as powershell  
-Then you have to install Pester. This is only for tests: `Install-Module -Name Pester -Force -SkipPublisherCheck`  
-You could use your already installed powershell as well. However it has an old Pester Module already installed which you can not use and I could not figure out how it can be updated: https://github.com/pester/Pester/issues/1201  
-Navigate into the test folder and run the `test.ps1` file. It will backup your env vars and your jenv config while testing and automatically restore them later. But you should always let the tests finish else your vars and config wont be restored
+## 用法 (注意: local 会覆盖 change，使用前请覆盖 local)
+
+1. **添加新的 Java 环境 (需要绝对路径)**
+   *jenv add `<name> <path>`*
+   例如: `jenv add jdk15 D:\Programme\Java\jdk-15.0.1`
+2. **更改当前会话的 Java 版本**
+   *jenv use `<name>`*
+   例如: `jenv use jdk15`
+   脚本环境变量:
+   —PowerShell: `$ENV:JENVUSE="jdk17"`
+   —CMD/BATCH: `set "JENVUSE=jdk17"`
+3. **清除当前会话的 Java 版本**
+   *jenv use remove*
+   例如: `jenv use remove`
+   脚本环境变量:
+   —PowerShell: `$ENV:JENVUSE=$null`
+   —CMD/BATCH: `set "JENVUSE="`
+4. **全局更改 Java 版本**
+   *jenv change `<name>`*
+   例如: `jenv change jdk15`
+5. **始终在此文件夹中使用此 Java 版本**
+   *jenv local `<name>`*
+   例如: `jenv local jdk15  `
+6. **清除此文件夹的 Java 版本**
+   *jenv local remove*
+   例如: `jenv local remove`
+7. **列出所有 Java 环境**
+   *jenv list*
+   例如: `jenv list`
+8. **从 JEnv 列表中删除现有 JDK**
+   *jenv remove `<name>`*
+   例如: `jenv remove jdk15`
+9. **启用 javac、javaw 或其他位于 java 目录中的可执行文件**
+   *jenv link `<Executable name>`*
+   例如: `jenv link javac`
+10. **卸载jenv并自动恢复您选择的Java版本**
+    *jenv uninstall `<名称>`*
+    示例：`jenv uninstall jdk17`
+11. **自动搜索要添加的Java版本**
+    *jenv autoscan [–yes|-y] `?<路径>?`*
+    示例：`jenv autoscan "C:\Program Files\Java"`
+    示例：`jenv autoscan` // 将搜索整个系统 示例：`jenv autoscan -y "C:\Program Files\Java"` // 将接受默认值
+
+## 这是如何工作的？
+
+此脚本创建一个java.bat文件，该文件使用正确的版本调用java.exe 当ps脚本更改环境变量时，它们会被导出到tmp文件并由批处理文件应用 添加了PowerShell脚本的附加参数。"–output"别名为"-o"将为批处理创建tmp文件。请参见下面的图像
+
+## 贡献
+
+如果您想做出贡献，请随意这样做。对于初学者来说，这是一个很好的存储库，因为代码量不大，您可以很容易地理解它的工作原理。
+要运行测试，建议您使用最新版本的powershell（pwsh.exe）：
+https://docs.microsoft.com/en-us/powershell/scripting/install/installing-powershell-on-windows?view=powershell-7.2
+请注意，您必须将其作为pwsh而不是powershell运行
+然后，您必须安装Pester。这仅用于测试：`Install-Module -Name Pester -Force -SkipPublisherCheck`
+您也可以使用已安装的powershell。但是，它已经安装了一个旧的Pester模块，您无法使用它，我无法弄清楚如何更新它：https://github.com/pester/Pester/issues/1201
+导航到测试文件夹并运行`test.ps1`文件。它将在测试时备份您的环境变量和jenv配置，并在以后自动恢复它们。但是，您应始终让测试完成，否则您的变量和配置将不会被恢复。
